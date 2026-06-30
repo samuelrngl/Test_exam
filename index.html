@@ -10,25 +10,28 @@
         tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
       };
     </script>
-            #timer {
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: #2c3e50;
-                color: #fff;
-                padding: 15px;
-                border-radius: 8px;
-                font-size: 1.2em;
-                font-weight: bold;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-                z-index: 1000;
-                display: none; /* Se mantiene oculto hasta empezar el examen */
-            }
+
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; line-height: 1.6; margin: 0; padding: 20px; }
         .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         h1 { text-align: center; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
         
+        /* Estilo del Timer */
+        #timer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2c3e50;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: none; /* Se mantiene oculto hasta empezar el examen */
+        }
+
         /* Estilos de la pantalla de inicio */
         .config-buttons { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
         .config-buttons button { background-color: #2c3e50; border-radius: 8px; font-weight: bold; }
@@ -54,7 +57,9 @@
     </style>
 </head>
 <body>
+
 <div id="timer">Tiempo: 00:00</div>
+
 <div class="container" id="start-screen">
     <h1>Simulador de Examen ITR</h1>
     <p style="text-align: center; font-size: 1.1em;">Selecciona la longitud de tu examen. El sistema extraerá preguntas al azar de las 5 áreas evaluadas para compilar tu prueba.</p>
@@ -116,7 +121,6 @@
         { q: "Reactivo 28. Determinar el número cuyo valor sumado con su mitad y su tercera parte es igual a 22", options: ["A) $12$", "B) $10$", "C) $8$", "D) $6$"], respuestaCorrecta: 0, justificacion: "Se plantea la ecuación: $x + \\frac{x}{2} + \\frac{x}{3} = 22$. Multiplicando por el común denominador $6$: $6x + 3x + 2x = 132 \\Rightarrow 11x = 132 \\Rightarrow x = 12$." },
         { q: "Reactivo 29. ¿Qué porcentaje del número 180 representa el número 45?", options: ["A) $25\\%$", "B) $20\\%$", "C) $30\\%$", "D) $15\\%$"], respuestaCorrecta: 0, justificacion: "Se calcula la relación directa multiplicada por cien: $\\frac{45}{180} \\times 100 = 0.25 \\times 100 = 25\\%$." },
         { q: "Reactivo 30. Un tanque industrial almacena 60 litros de una solución al 20% de concentración ácida. Si se añaden 15 litros de agua pura a la mezcla, ¿cuál será la concentración porcentual resultante de la solución final?", options: ["A) $16\\%$", "B) $12\\%$", "C) $15\\%$", "D) $18\\%$"], respuestaCorrecta: 0, justificacion: "El volumen de ácido puro es constante: $60 \\times 0.20 = 12$ litros. El volumen final de la solución es $60 + 15 = 75$ litros. La nueva concentración es $\\frac{12}{75} = 0.16 = 16\\%$." },
-        
         { q: "Reactivo 31. Simplificar la siguiente expresión aplicando leyes de exponentes: $\\frac{(a^3b^{-2})^2(a^{-1}b^3)^3}{a^2b^4}$", options: ["A) $a^1b^1$", "B) $a^1b^{-1}$", "C) $a^{-1}b^1$", "D) $a^2b^{-2}$"], respuestaCorrecta: 0, justificacion: "Se expande el numerador: $(a^6b^{-4})(a^{-3}b^9) = a^3b^5$. Se realiza la división: $\\frac{a^3b^5}{a^2b^4} = a^{3-2}b^{5-4} = a^1b^1$." },
         { q: "Reactivo 32. Escribir en lenguaje algebraico la siguiente expresión: 'La diferencia entre el doble del cubo de un número y el triple del cuadrado de otro número'", options: ["A) $2x^3 - 3y^2$", "B) $2x^2 - 3y^3$", "C) $(2x)^3 - (3y)^2$", "D) $3x^2 - 2y^3$"], respuestaCorrecta: 0, justificacion: "'El doble del cubo de un número' se escribe como $2x^3$. 'El triple del cuadrado de otro' es $3y^2$. 'La diferencia' implica una resta: $2x^3 - 3y^2$." },
         { q: "Reactivo 33. Desarrollar el siguiente binomio empleando el teorema de expansión cúbica: $(3x - 2y)^3$", options: ["A) $27x^3 - 54x^2y + 36xy^2 - 8y^3$", "B) $27x^3 - 8y^3$", "C) $27x^3 - 18x^2y + 12xy^2 - 8y^3$", "D) $9x^3 - 36x^2y + 54xy^2 - 8y^3$"], respuestaCorrecta: 0, justificacion: "Siguiendo la fórmula $(a-b)^3 = a^3 - 3a^2b + 3ab^2 - b^3$ con $a=3x$ y $b=2y$: $(3x)^3 - 3(3x)^2(2y) + 3(3x)(2y)^2 - (2y)^3 = 27x^3 - 54x^2y + 36xy^2 - 8y^3$." },
@@ -147,7 +151,6 @@
         { q: "Reactivo 58. El triple de un número disminuido en 4 es 11. ¿Cuál es el número?", options: ["A) 5", "B) 4", "C) 6", "D) 7"], respuestaCorrecta: 0, justificacion: "Ecuación: $3x - 4 = 11 \\Rightarrow 3x = 15 \\Rightarrow x = 5$." },
         { q: "Reactivo 59. Factoriza: $y^2 + 5y + 6$", options: ["A) $(y+2)(y+3)$", "B) $(y-2)(y-3)$", "C) $(y+1)(y+6)$", "D) $(y+5)(y+1)$"], respuestaCorrecta: 0, justificacion: "Buscamos dos números que sumados den 5 y multiplicados den 6. Estos son 2 y 3. Factorización: $(y+2)(y+3)$." },
         { q: "Reactivo 60. Evaluar la función $f(x) = 2x - 3$ en $x=4$", options: ["A) 5", "B) 6", "C) 8", "D) 2"], respuestaCorrecta: 0, justificacion: "Sustituyendo $x=4$: $f(4) = 2(4) - 3 = 8 - 3 = 5$." },
-        
         { q: "Reactivo 61. En un triángulo rectángulo, el cateto opuesto al ángulo $\\theta$ mide $8\\text{ cm}$ y el cateto adyacente mide $15\\text{ cm}$. Determinar el valor correspondiente para la función trigonométrica del seno de dicho ángulo.", options: ["A) $\\frac{8}{17}$", "B) $\\frac{15}{17}$", "C) $\\frac{8}{15}$", "D) $\\frac{15}{8}$"], respuestaCorrecta: 0, justificacion: "Primero se obtiene la hipotenusa por Pitágoras: $h = \\sqrt{8^2 + 15^2} = \\sqrt{64 + 225} = \\sqrt{289} = 17\\text{ cm}$. El seno se define como la razón de cateto opuesto entre hipotenusa: $\\frac{8}{17}$." },
         { q: "Reactivo 62. Convertir una abertura angular de $135^\\circ$ sexagesimales a su correspondiente representación física en radianes.", options: ["A) $\\frac{3\\pi}{4}$", "B) $\\frac{2\\pi}{3}$", "C) $\\frac{5\\pi}{6}$", "D) $\\frac{5\\pi}{4}$"], respuestaCorrecta: 0, justificacion: "Multiplicando por el factor de conversión angular $\\frac{\\pi\\text{ rad}}{180^\\circ}$: $135^\\circ \\times \\frac{\\pi}{180^\\circ} = \\frac{135\\pi}{180}$. Simplificando entre el factor común $45$, resulta $\\frac{3\\pi}{4}$." },
         { q: "Reactivo 63. Simplificar la siguiente expresión trigonométrica por identidades elementales: $\\cos x \\tan x \\csc x$", options: ["A) $1$", "B) $\\operatorname{sen} x$", "C) $\\cos x$", "D) $\\sec x$"], respuestaCorrecta: 0, justificacion: "Expresando las funciones en términos de seno y coseno: $\\cos x \\left( \\frac{\\operatorname{sen} x}{\\cos x} \\right) \\left( \\frac{1}{\\operatorname{sen} x} \\right)$. Se simplifican de manera cruzada los términos dando como resultado la unidad ($1$)." },
@@ -178,7 +181,6 @@
         { q: "Reactivo 88. Encontrar las coordenadas de los focos de la hipérbola con ecuación general: $16x^2 - 9y^2 + 144 = 0$", options: ["A) $F(0, \\pm 5)$", "B) $F(\\pm 5, 0)$", "C) $F(0, \\pm 13)$", "D) $F(\\pm 3, \\pm 4)$"], respuestaCorrecta: 0, justificacion: "Ordenando y normalizando la ecuación: $9y^2 - 16x^2 = 144 \\Rightarrow \\frac{y^2}{16} - \\frac{x^2}{9} = 1$. Es una hipérbola vertical con $a^2 = 16$ y $b^2 = 9$. La semidistancia focal es $c = \\sqrt{16+9} = 5$. Los focos se ubican en $F(0, \\pm 5)$." },
         { q: "Reactivo 89. Si las rectas descritas por las funciones lineales $y = (2a - 3)x + 6$ y $y = 5x - 8$ son paralelas entre sí, determinar el valor de la constante $a$", options: ["A) $4$", "B) $1$", "C) $5$", "D) $-1$"], respuestaCorrecta: 0, justificacion: "Al ser rectas paralelas, sus pendientes correspondientes deben ser numéricamente idénticas: $2a - 3 = 5 \\Rightarrow 2a = 8 \\Rightarrow a = 4$." },
         { q: "Reactivo 90. Determinar la longitud del eje focal de la parábola cuya ecuación general es: $x^2 - 12y = 0$", options: ["A) $3$", "B) $6$", "C) $12$", "D) $4$"], respuestaCorrecta: 0, justificacion: "La ecuación ordinaria es $x^2 = 12y$, de donde se deriva que $4p = 12 \\Rightarrow p = 3$. La distancia focal es el parámetro $p = 3$." },
-
         { q: "Reactivo 91. Calcular el valor numérico obtenido al evaluar el siguiente límite polinomial directo: $\\lim_{x \\to 2} (3x^2 - 5x + 8)$", options: ["A) $10$", "B) $14$", "C) $8$", "D) $12$"], respuestaCorrecta: 0, justificacion: "Al ser una función polinómica continua en todo el espectro de reales, el límite se evalúa de manera directa sustituyendo la variable: $\\lim_{x \\to 2} (3x^2 - 5x + 8) = 3(2)^2 - 5(2) + 8 = 12 - 10 + 8 = 10$." },
         { q: "Reactivo 92. Evaluar el siguiente límite que presenta una indeterminación de la forma cero sobre cero: $\\lim_{x \\to 3} \\frac{x^2 - 9}{x - 3}$", options: ["A) $6$", "B) $3$", "C) $0$", "D) No existe."], respuestaCorrecta: 0, justificacion: "Sustituyendo directamente resulta $\\frac{0}{0}$. Factorizando el numerador: $\\lim_{x \\to 3} \\frac{(x-3)(x+3)}{x-3}$. Al simplificar el factor común indeterminado $(x-3)$ se obtiene: $\\lim_{x \\to 3} (x+3) = 6$." },
         { q: "Reactivo 93. Determinar el valor límite de la función racional cuando la variable tiende al infinito: $\\lim_{x \\to \\infty} \\frac{4x^2 - 3x + 5}{3x^2 + 5x - 2}$", options: ["A) $\\frac{4}{3}$", "B) $\\infty$", "C) $0$", "D) $\\frac{5}{2}$"], respuestaCorrecta: 0, justificacion: "Dividiendo numerador y denominador entre la variable de mayor potencia ($x^2$): $\\lim_{x \\to \\infty} \\frac{4 - \\frac{3}{x} + \\frac{5}{x^2}}{3 + \\frac{5}{x} - \\frac{2}{x^2}} = \\frac{4 - 0 + 0}{3 + 0 - 0} = \\frac{4}{3}$." },
@@ -208,8 +210,7 @@
         { q: "Reactivo 117. Calcular la segunda derivada con respecto a la variable $x$ de la función polinomial: $y = 2x^4 - 5x^3 + 3x^2 - 9$", options: ["A) $y'' = 24x^2 - 30x + 6$", "B) $y'' = 8x^3 - 15x^2 + 6x$", "C) $y'' = 24x^2 - 30x$", "D) $y'' = 8x^2 - 30x + 6$"], respuestaCorrecta: 0, justificacion: "La primera derivada de la función es: $y' = 8x^3 - 15x^2 + 6x$. Volviendo a derivar sobre dicha función se obtiene: $y'' = 24x^2 - 30x + 6$." },
         { q: "Reactivo 118. Utilizar la regla de la cadena para obtener la derivada de la función con potencia compuesta: $f(x) = (2x^3 - 5)^4$", options: ["A) $f'(x) = 24x^2(2x^3 - 5)^3$", "B) $f'(x) = 4(2x^3 - 5)^3$", "C) $f'(x) = 24x(2x^3 - 5)^3$", "D) $f'(x) = 12x^2(2x^3 - 5)^3$"], respuestaCorrecta: 0, justificacion: "Aplicando la regla para potencias compuestas de la forma $\\frac{d}{dx}[u^n] = n u^{n-1} \\times u'$: con $u = 2x^3 - 5$ y $u' = 6x^2$. $f'(x) = 4(2x^3 - 5)^3 \\times (6x^2) = 24x^2(2x^3 - 5)^3$." },
         { q: "Reactivo 119. Evaluar el área delimitada por la función identidad $y = 2x$, el eje de las abscisas, y las rectas verticales comprendidas en $x = 0$ y $x = 3$", options: ["A) $9$", "B) $18$", "C) $6$", "D) $12$"], respuestaCorrecta: 0, justificacion: "Resolviendo por la aplicación directa de la integral definida de límites dados: $\\text{Área} = \\int_{0}^{3} 2x \\, dx = \\left[ x^2 \\right]_{0}^{3} = 3^2 - 0^2 = 9$." },
-        { q: "Reactivo 120. Determinar el valor límite trigonométrico notable para la siguiente expresión cuando el ángulo tiende a cero: $\\lim_{\\theta \\to 0} \\frac{\\theta}{\\operatorname{sen}\\theta}$", options: ["A) $1$", "B) $0$", "C) No existe.", "D) $\\infty$"], respuestaCorrecta: 0, justificacion: "Se trata de la forma recíproca directa del límite trigonométrico notable fundamental, la cual por propiedades de límites mantiene como valor de convergencia la unidad ($1$)." },
-        
+        { q: "Reactivo 120. Determinar el valor límite trigonométrico notable para la siguiente expression cuando el ángulo tiende a cero: $\\lim_{\\theta \\to 0} \\frac{\\theta}{\\operatorname{sen}\\theta}$", options: ["A) $1$", "B) $0$", "C) No existe.", "D) $\\infty$"], respuestaCorrecta: 0, justificacion: "Se trata de la forma recíproca directa del límite trigonométrico notable fundamental, la cual por propiedades de límites mantiene como valor de convergencia la unidad ($1$)." },
         { q: "Reactivo 121. Calcular la media aritmética, la mediana y la moda de las puntuaciones de calidad obtenidas: $6, 8, 8, 9, 10, 11, 11, 11, 12$", options: ["A) Media: $9.55$, Mediana: $10$, Moda: $11$", "B) Media: $9$, Mediana: $9.5$, Moda: $11$", "C) Media: $10$, Mediana: $10$, Moda: $11$", "D) Media: $9.55$, Mediana: $11$, Moda: $11$"], respuestaCorrecta: 0, justificacion: "Sumando las observaciones resulta: $6+8+8+9+10+11+11+11+12 = 86$. Dividiendo entre la muestra $N = 9$ se obtiene la media: $\\frac{86}{9} \\approx 9.55$. La mediana es la observación central en el listado ordenado (el quinto término), que es $10$. La moda es el valor más repetido, que es $11$." },
         { q: "Reactivo 122. En un grupo de control de 8 muestras de material, los pesos medidos en gramos son: $12, 12, 14, 14, 15, 16, 17, 20$. Calcular el rango estadístico y el valor de la varianza poblacional de las mediciones.", options: ["A) Rango: $8$, Varianza: $6.25$", "B) Rango: $8$, Varianza: $7.14$", "C) Rango: $6$, Varianza: $5.50$", "D) Rango: $7$, Varianza: $6.25$"], respuestaCorrecta: 0, justificacion: "El rango es la diferencia de valores extremos: $20 - 12 = 8$. La media poblacional es: $\\mu = \\frac{120}{8} = 15$. La varianza poblacional es el promedio de diferencias al cuadrado con la media: $\\sigma^2 = \\frac{2(12-15)^2 + 2(14-15)^2 + (15-15)^2 + (16-15)^2 + (17-15)^2 + (20-15)^2}{8} = \\frac{18 + 2 + 0 + 1 + 4 + 25}{8} = \\frac{50}{8} = 6.25$." },
         { q: "Reactivo 123. Calcular la desviación estándar muestral de una pequeña muestra aleatoria compuesta por las observaciones de datos: $3, 5, 7, 9$", options: ["A) $\\sqrt{6.67} \\approx 2.58$", "B) $2.5$", "C) $\\sqrt{5} \\approx 2.24$", "D) $2$"], respuestaCorrecta: 0, justificacion: "La media muestral es $\\bar{x} = \\frac{3+5+7+9}{4} = 6$. La suma de las desviaciones al cuadrado es: $(3-6)^2 + (5-6)^2 + (7-6)^2 + (9-6)^2 = 9 + 1 + 1 + 9 = 20$. Al ser una muestra, se divide entre los grados de libertad $n-1 = 3$: la varianza muestral es $s^2 = \\frac{20}{3} \\approx 6.67$. La desviación estándar es $s = \\sqrt{6.67} \\approx 2.58$." },
@@ -243,22 +244,20 @@
     ];
 
     let currentExamQuestions = [];
+    
+    // Variables globales para el temporizador
+    let seconds = 0;
+    let timerInterval = null;
 
-    // Función para obtener preguntas aleatorias
+    // Función para obtener preguntas aleatorias con barajado forzado
     function getRandom(arr, n) {
-        if (n >= arr.length) return [...arr];
         let shuffled = [...arr];
         for (let i = shuffled.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
         }
-        return shuffled.slice(0, n);
+        return n >= arr.length ? shuffled : shuffled.slice(0, n);
     }
-
-    // Función que arranca el examen dependiendo la cantidad deseada por sección
-// Variables globales para el temporizador
-    let seconds = 0;
-    let timerInterval;
 
     // Función que arranca el examen dependiendo la cantidad deseada por sección
     function startExam(n) {
@@ -309,7 +308,10 @@
             header.innerText = seccion.titulo;
             container.appendChild(header);
 
-            seccion.preguntas.forEach((pregunta) => {
+            seccion.preguntas.forEach((preguntaOriginal) => {
+                // Clonamos la pregunta para no alterar la base de datos principal
+                const pregunta = JSON.parse(JSON.stringify(preguntaOriginal));
+
                 // Limpiar texto de "A)" para barajar bien
                 pregunta.options = pregunta.options.map(opt => opt.replace(/^[A-D]\)\s*/, ''));
                 const textoCorrectoOriginal = pregunta.options[pregunta.respuestaCorrecta];
@@ -388,8 +390,9 @@
 
     // Calcular la calificación final
     function calculateGrade() {
-        // NUEVO: Detener el cronómetro al calificar
+        // Detener el cronómetro al calificar
         clearInterval(timerInterval);
+
         let score = 0;
         let answered = 0;
         let totalQuestions = 0;
@@ -428,8 +431,8 @@
 
         const percentage = (score / totalQuestions) * 100;
         document.getElementById('final-grade').innerText = `${score} / ${totalQuestions} (${percentage.toFixed(1)}%)`;
-
-        // NUEVO: Mostrar el tiempo formateado
+        
+        // Mostrar el tiempo formateado
         const finalMins = Math.floor(seconds / 60);
         const finalSecs = (seconds % 60).toString().padStart(2, '0');
         document.getElementById('total-time').innerText = `Tiempo total empleado: ${finalMins} minutos y ${finalSecs} segundos.`;
