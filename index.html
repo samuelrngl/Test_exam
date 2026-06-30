@@ -251,12 +251,13 @@
 
     // Función para obtener preguntas aleatorias con barajado forzado
     function getRandom(arr, n) {
+        if (n >= arr.length) return [...arr];
         let shuffled = [...arr];
         for (let i = shuffled.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
         }
-        return n >= arr.length ? shuffled : shuffled.slice(0, n);
+        return shuffled.slice(0, n);
     }
 
     // Función que arranca el examen dependiendo la cantidad deseada por sección
@@ -423,10 +424,6 @@
                     score++;
                 }
             }
-        }
-
-        if (answered < totalQuestions) {
-            alert(`Has respondido ${answered} de ${totalQuestions} preguntas. No te preocupes, se calificarán las que ya respondiste.`);
         }
 
         const percentage = (score / totalQuestions) * 100;
