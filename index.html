@@ -10,7 +10,20 @@
         tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
       };
     </script>
-
+            #timer {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #2c3e50;
+                color: #fff;
+                padding: 15px;
+                border-radius: 8px;
+                font-size: 1.2em;
+                font-weight: bold;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+                z-index: 1000;
+                display: none; /* Se mantiene oculto hasta empezar el examen */
+            }
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; line-height: 1.6; margin: 0; padding: 20px; }
         .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
@@ -41,7 +54,7 @@
     </style>
 </head>
 <body>
-
+<div id="timer">Tiempo: 00:00</div>
 <div class="container" id="start-screen">
     <h1>Simulador de Examen ITR</h1>
     <p style="text-align: center; font-size: 1.1em;">Selecciona la longitud de tu examen. El sistema extraerá preguntas al azar de las 5 áreas evaluadas para compilar tu prueba.</p>
@@ -65,6 +78,7 @@
         <h2>Resultados Globales</h2>
         <p>Tu calificación final es:</p>
         <p class="grade" id="final-grade"></p>
+        <p id="total-time" style="font-size: 1.2em; font-weight: bold; color: #2c3e50;"></p>
         <p id="feedback-message"></p>
         <button type="button" onclick="location.reload()" style="background-color: #2c3e50;">Reiniciar Simulador</button>
     </div>
@@ -242,9 +256,25 @@
     }
 
     // Función que arranca el examen dependiendo la cantidad deseada por sección
+// Variables globales para el temporizador
+    let seconds = 0;
+    let timerInterval;
+
+    // Función que arranca el examen dependiendo la cantidad deseada por sección
     function startExam(n) {
         document.getElementById('start-screen').style.display = 'none';
         document.getElementById('exam-screen').style.display = 'block';
+
+        // Lógica del Temporizador (Iniciar)
+        document.getElementById('timer').style.display = 'block';
+        seconds = 0;
+        document.getElementById('timer').innerText = `Tiempo: 00:00`;
+        timerInterval = setInterval(() => {
+            seconds++;
+            const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const secs = (seconds % 60).toString().padStart(2, '0');
+            document.getElementById('timer').innerText = `Tiempo: ${mins}:${secs}`;
+        }, 1000);
 
         // Dividir el banco en las 5 secciones exactas
         const sec1 = questions.slice(0, 30);
@@ -358,6 +388,8 @@
 
     // Calcular la calificación final
     function calculateGrade() {
+        // NUEVO: Detener el cronómetro al calificar
+        clearInterval(timerInterval);
         let score = 0;
         let answered = 0;
         let totalQuestions = 0;
@@ -396,6 +428,11 @@
 
         const percentage = (score / totalQuestions) * 100;
         document.getElementById('final-grade').innerText = `${score} / ${totalQuestions} (${percentage.toFixed(1)}%)`;
+
+        // NUEVO: Mostrar el tiempo formateado
+        const finalMins = Math.floor(seconds / 60);
+        const finalSecs = (seconds % 60).toString().padStart(2, '0');
+        document.getElementById('total-time').innerText = `Tiempo total empleado: ${finalMins} minutos y ${finalSecs} segundos.`;
         
         let feedback = "";
         if(percentage >= 90) feedback = "¡Excelente trabajo! Tienes un dominio sobresaliente.";
